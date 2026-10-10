@@ -16,5 +16,6 @@ Open Settings → Plugins → Title style to configure the plugin:
 ## Limits
 
 - Only newly created workspaces are renamed. Existing workspace titles are preserved.
-- Workspaces manually renamed by the user are not overwritten.
+- Workspaces manually renamed by the user are preserved (except during the initial 60-second creation window while background title generation resolves).
+- The first prompt (up to 600 characters) is sent to the selected model provider to generate the title.
 - Each title generation issues a single LLM request billed according to your configured metadata model.
