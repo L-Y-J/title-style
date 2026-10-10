@@ -2,6 +2,8 @@
 
 为 Paseo 会话（workspace）自动生成标题的插件：用设置页里可自定义的提示词调用模型，重命名侧边栏标题。默认生成简体中文标题，不局限于中文。
 
+![Title Style Sidebar](https://raw.githubusercontent.com/zwmmm/title-style/main/assets/title-style-sidebar.png)
+
 Paseo 内置的自动命名输出英文且没有全局语言配置。本插件在后台监听新会话的第一个 agent，用「元数据生成」配置的模型生成标题并覆盖，对整个 daemon 全局生效，包括非 git 目录。
 
 ## Install
@@ -15,6 +17,8 @@ paseo plugin add zwmmm/title-style
 ## 设置
 
 Settings → Plugins → title-style → 打开「设置」（界面语言跟随系统语言，中文/英文），修改后自动保存：
+
+![Title Style Settings](https://raw.githubusercontent.com/zwmmm/title-style/main/assets/title-style-settings.png)
 
 | 设置项 | 说明 |
 | --- | --- |
