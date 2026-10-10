@@ -1,5 +1,9 @@
 {
   "id": "title-style",
-  "requirements": { "paseo": ">=0.8.0" },
+  "name": "Title style",
+  "description": "Rename Paseo workspaces with a configurable LLM prompt — Chinese titles by default",
+  "requirements": {
+    "paseo": ">=0.8.0"
+  },
   "build": [["npm", "install", "--no-fund", "--no-audit"]]
 }
