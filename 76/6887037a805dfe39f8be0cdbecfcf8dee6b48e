@@ -1,0 +1,20 @@
+server/namer.ts
+  s_a74c9c81eebccc::t_4c32217ffb517b 4,7-9
+  s_a74c9c81eebccc::t_be2c290bfffa2f 10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "766887037a805dfe39f8be0cdbecfcf8dee6b48e",
+  "prompts": {},
+  "sessions": {
+    "s_a74c9c81eebccc": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a17868-e6f5-714c-bf14-91c7d0023d80",
+        "model": "deepseek-deepseek-v4.1-flash-fast"
+      },
+      "human_author": "liyongjie.103 <liyongjie.103@jd.com>"
+    }
+  }
+}
