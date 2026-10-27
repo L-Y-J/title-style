@@ -8,12 +8,18 @@ import { titleStyleSettings, type TitleStyleSettings } from "../shared/settings"
 // plugin SDK contract so the bundle needs no local @getpaseo/client install.
 type PaseoApi = PluginHookContext["paseo"];
 
+// Workspace snapshots carry createdAt, which the plugin hook contract omits.
+type WorkspaceSnapshotLike = { name?: string | null; createdAt?: string | null };
+
 const MAX_TITLE_CHARS = 80;
 const PROMPT_SOURCE_MAX_CHARS = 600;
 const GENERATE_TIMEOUT_MS = 30_000;
 // A title that changed during generation within this window is the built-in
 // English generator landing, not a user rename.
 const BUILTIN_WINDOW_MS = 60_000;
+// A workspace this young is the one the triggering session created; anything
+// older already had a name the user could have set, so we leave it alone.
+const NEW_WORKSPACE_WINDOW_MS = 10 * 60_000;
 const OUR_AGENT_TITLE = "会话标题生成";
 
 const processed = new Set<string>();
@@ -118,7 +124,19 @@ export async function nameWorkspace(
     const settings = await readSettings();
     if (!settings.enabled) return;
     const ws = paseo.workspaces.ref(workspaceId);
-    const titleAtStart = (await ws.refresh())?.name ?? null;
+    const snapshot = (await ws.refresh()) as WorkspaceSnapshotLike | null;
+    const workspaceCreatedAt = Date.parse(snapshot?.createdAt ?? "");
+    if (
+      !Number.isFinite(workspaceCreatedAt) ||
+      Date.now() - workspaceCreatedAt > NEW_WORKSPACE_WINDOW_MS
+    ) {
+      processed.add(workspaceId);
+      console.log(
+        `[title-style] existing workspace (createdAt=${snapshot?.createdAt ?? "unknown"}), skipping`,
+      );
+      return;
+    }
+    const titleAtStart = snapshot?.name ?? null;
 
     const model = await resolveModel(paseo, settings.model);
     if (!model) {
