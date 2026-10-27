@@ -1,0 +1,24 @@
+README.md
+  s_7a00967c34da11::t_d2bf49d67de12c 43
+  s_7a00967c34da11::t_592b2e291d31db 44
+server/namer.ts
+  s_7a00967c34da11::t_7c11eb04aee43c 11-13,20-22,127-139
+package.json
+  s_7a00967c34da11::t_a083a0a6289eb5 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "7398fc934812c445025e403ec55500af780871c7",
+  "prompts": {},
+  "sessions": {
+    "s_7a00967c34da11": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a17cba-7349-751c-a2d7-472579767f1d",
+        "model": "DeepSeek-V4.1-Flash-A-joybuilder"
+      },
+      "human_author": "liyongjie.103 <liyongjie.103@jd.com>"
+    }
+  }
+}
