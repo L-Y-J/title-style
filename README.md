@@ -33,15 +33,19 @@ Settings → Plugins → title-style → 打开「设置」（界面语言跟随
 
 ## 工作方式
 
-- 监听 `agent.created`：每个 workspace 的第一个 agent 创建后异步执行一次
+- 监听 `agent.created`：每个新会话的顶层 agent 创建后异步执行（子代理与委派代理不触发）
 - 从首条 prompt 提取素材（最多 600 字符），调用模型返回 `{"title": "…"}`
 - 通过 `setTitle` 写入 workspace 标题；Paseo 内置的英文命名结果会被覆盖，且不会反向覆盖本插件的标题
+- 归属由 `~/.paseo/plugin-data/title-style/ownership.json` 记录：插件自己起过名的 workspace 会在每个新会话里更新标题；一旦标题不再是插件上次写的那个值（你手动改过），该 workspace 永久交给用户，不再碰
 - 生成用的临时 agent 以委托子代理（delegated subagent）身份运行，完成后自动归档，全程静默，不产生应用内或推送通知
 
 ## Limitations
 
-- 只重命名新建的 workspace（创建后 10 分钟内）；在已有 workspace 里新开会话不会改名
-- 新建 workspace 里，如果你在生成期间手动改名，创建后 60 秒内仍可能被覆盖
+- 标题随每个新会话迭代更新，只反映最新一次会话
+- 插件第一次遇到时已经有名字的 workspace（包括装插件之前就命名的、你手动起的）一律不动；只有无标题或「本会话刚创建、10 分钟以内」的 workspace 才会被接管
+- 插件自己起过名的 workspace 里，如果你在标题生成的那几秒里手动改名，这一次仍可能被覆盖（Paseo 没有「标题由谁写入」的字段，无法区分内置命名与手动修改）
+- 删除 `ownership.json` 等于把所有 workspace 重置为「无记录」状态
+- 子代理、以及其他插件派生的 agent（标签里带 `*-agent-id`，如 `paseo.parent-agent-id`）不触发改名；定时任务会话（`paseo.schedule-*`）算真实会话，会改名
 - 生成期间会话的第一个 agent 下会短暂出现一个名为「会话标题生成」的子代理，完成后自动归档
 - 只处理会话标题；commit message 与 PR 文本的生成不受影响
-- 每次生成是一次真实模型调用，按元数据生成所配模型的用量计费
+- 每个新会话一次真实模型调用，按元数据生成所配模型的用量计费
