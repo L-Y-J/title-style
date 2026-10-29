@@ -1,0 +1,28 @@
+README.md
+  s_7a00967c34da11::t_98613348d94ddb 36,39,44-47,51
+  s_7a00967c34da11::t_674a808a1069a4 48
+server/namer.ts
+  s_7a00967c34da11::t_b75407b1e3cf14 19-21,23-24,182-185,187-192
+  s_7a00967c34da11::t_3be702a517aef3 1,25-30,34-35
+  s_7a00967c34da11::t_96c96123074bd8 46-98,174,178
+  s_7a00967c34da11::t_07ad1d1fcb458d 202-203,205-212,214,276-278,280-287
+  s_7a00967c34da11::t_4c9ff942de3d9e 14-18,22
+package.json
+  s_7a00967c34da11::t_2cb6b780f1687a 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.6",
+  "base_commit_sha": "fce68aefbfe48089ca6af25f07e8bea8df5744a1",
+  "prompts": {},
+  "sessions": {
+    "s_7a00967c34da11": {
+      "agent_id": {
+        "tool": "pi",
+        "id": "01a17cba-7349-751c-a2d7-472579767f1d",
+        "model": "DeepSeek-V4.1-Flash-A-joybuilder"
+      },
+      "human_author": "liyongjie.103 <liyongjie.103@jd.com>"
+    }
+  }
+}
